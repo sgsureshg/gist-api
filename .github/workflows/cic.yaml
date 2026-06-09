@@ -58,6 +58,15 @@ jobs:
         run: |
           docker build -t ${{ env.IMAGE_NAME}}:${{ steps.sha.outputs.short }} .
 
+      - name: Trivy Scan
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          image-ref: ${{ env.IMAGE_NAME }}:${{ steps.sha.outputs.short }}
+          format: table
+          exit-code: '1'
+          severity: 'HIGH,CRITICAL'
+        
+
       - name: Docke push
         run: |
           docker push  ${{ env.IMAGE_NAME}}:${{ steps.sha.outputs.short }}

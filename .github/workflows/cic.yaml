@@ -11,7 +11,7 @@ on:
       - main
 
 env:
-  IMAGE_NAME: gist-api
+  IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/gist-api
   PYTHON_VERSION: "3.12"
 
 jobs:
